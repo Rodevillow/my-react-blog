@@ -1,16 +1,16 @@
+import React, { Fragment } from 'react';
 import './App.css';
-import AuthContainer from './components/AuthContainer';
-import RegistrationContainer from './components/RegistrationContainer';
 
-function App() {
+import Header from './components/includes/Header';
+import Footer from './components/includes/Footer';
+
+function App({ children }) {
   return (
-    <div className="App">
-      <h1>App code...</h1>
-      <div className="App-wrapper">
-        <AuthContainer />
-        <RegistrationContainer />
-      </div>
-    </div>
+    <Fragment>
+      <Header />
+      {children}
+      <Footer />
+    </Fragment>
   );
 }
 

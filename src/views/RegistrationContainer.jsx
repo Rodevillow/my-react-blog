@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Registration from "./Registration";
+import Registration from "../components/Registration";
 import { setEmailText, setPasswordText, setRepeatPasswordText } from '../store/registration/actions';
 
 class RegistrationContainer extends React.Component {
