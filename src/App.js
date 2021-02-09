@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
-import './App.css';
-
 import Header from './components/includes/Header';
 import Footer from './components/includes/Footer';
+
+import bgPng from './assets/images/bg_img.png';
+
+import './assets/scss/app.scss';
 
 function App({ children }) {
   return (
     <Fragment>
+      <img className="bg-image" src={bgPng} alt="Computer Sci" />
       <Header />
-      {children}
+      <div className="container">
+        {children}
+      </div>
       <Footer />
     </Fragment>
   );

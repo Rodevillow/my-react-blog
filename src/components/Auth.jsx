@@ -23,6 +23,7 @@ export default class Auth extends React.Component {
         <form>
           <div>
             <input
+              className="input input__default"
               type="text"
               name="login"
               placeholder="E-mail"
@@ -31,8 +32,10 @@ export default class Auth extends React.Component {
               value={this.props.email}
             />
           </div>
+          <br/>
           <div>
             <input
+              className="input input__default"
               type="password"
               name="password"
               placeholder="Password"

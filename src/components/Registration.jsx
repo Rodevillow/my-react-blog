@@ -28,6 +28,7 @@ export default class Registration extends React.Component {
         <form>
           <div>
             <input
+              className="input input__default"
               type="text"
               name="login"
               placeholder="E-mail"
@@ -36,8 +37,10 @@ export default class Registration extends React.Component {
               value={this.props.email}
             />
           </div>
+          <br/>
           <div>
             <input
+              className="input input__default"
               type="password"
               name="password"
               placeholder="Password"
@@ -45,8 +48,10 @@ export default class Registration extends React.Component {
               value={this.props.password}
             />
           </div>
+          <br/>
           <div>
             <input
+              className="input input__default"
               type="password"
               name="repeatPassword"
               placeholder="Repeat Password"
