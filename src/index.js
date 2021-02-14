@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import rootReducer from './store/reducers';
+import rootReducer from './store';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 

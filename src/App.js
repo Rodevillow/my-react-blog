@@ -11,7 +11,7 @@ function App({ children }) {
     <Fragment>
       <img className="bg-image" src={bgPng} alt="Computer Sci" />
       <Header />
-      <div className="container">
+      <div className="content container">
         {children}
       </div>
       <Footer />

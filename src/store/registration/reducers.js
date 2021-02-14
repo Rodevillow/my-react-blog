@@ -1,6 +1,7 @@
-import { REGISTRATION_CHANGE_EMAIL_TEXT, REGISTRATION_CHANGE_PASSWORD_TEXT, REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT } from "./actions";
+import { REGISTRATION_CHANGE_NAME_TEXT, REGISTRATION_CHANGE_EMAIL_TEXT, REGISTRATION_CHANGE_PASSWORD_TEXT, REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT } from "./actions";
 
 const defaultState = {
+    name: '',
     email: '',
     password: '',
     repeatPassword: ''
@@ -9,6 +10,11 @@ const defaultState = {
 export const registrationReducer = (state = defaultState, action) => {
 
     switch (action.type) {
+        case REGISTRATION_CHANGE_NAME_TEXT:
+            return {
+                ...state,
+                name: action.payload
+            }
         case REGISTRATION_CHANGE_EMAIL_TEXT:
             return {
                 ...state,
@@ -24,7 +30,7 @@ export const registrationReducer = (state = defaultState, action) => {
                 ...state,
                 repeatPassword: action.payload
             }
+        default:
+            return state;
     }
-
-    return state;
 }

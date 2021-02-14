@@ -24,6 +24,7 @@
             position: relative;
             input {
                 padding: 0 42px 0 10px;
+                width: 314px;
             }
             &__icon {
                 position: absolute;
@@ -40,7 +41,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    border-radius: 5px;
+                    border-radius: $borderRadius;
                     width: 36px;
                     height: 39px;
 

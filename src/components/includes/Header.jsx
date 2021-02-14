@@ -8,14 +8,13 @@ import signInSvg from "../../assets/images/svg/signIn.svg";
 import signUpSvg from "../../assets/images/svg/signUp.svg";
 import searchSvg from "../../assets/images/svg/search.svg";
 
-import "../../assets/scss/_variables.scss";
 import "../../assets/scss/includes/header.scss";
 
 function Header() {
   return (
     <header className="header container">
       <Link className="logo" exact to="/">
-        <img src={logoSvg} alt="Logo" />
+        <img className="small-icon" src={logoSvg} alt="Logo" />
       </Link>
 
       <div className="header__left">
@@ -29,7 +28,7 @@ function Header() {
             type="text"
             name="search"
             placeholder="Поиск..."
-            autocomplete="off"
+            autoComplete="off"
           />
           <img src={searchSvg} className="search__icon" alt="Search" />
         </span>

@@ -2,16 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Registration from "../components/Registration";
-import { setEmailText, setPasswordText, setRepeatPasswordText } from '../store/registration/actions';
+import { setNameText, setEmailText, setPasswordText, setRepeatPasswordText } from '../store/registration/actions';
 
 class RegistrationContainer extends React.Component {
   render() {
     return (
-        <Registration 
-            email={this.props.email} 
-            password={this.props.password} 
+        <Registration
+            name={this.props.name}
+            email={this.props.email}
+            password={this.props.password}
             repeatPassword={this.props.repeatPassword}
-            setEmailText={this.props.setEmailText} 
+            setNameText={this.props.setNameText}
+            setEmailText={this.props.setEmailText}
             setPasswordText={this.props.setPasswordText}
             setRepeatPasswordText={this.props.setRepeatPasswordText}
         />
@@ -21,6 +23,7 @@ class RegistrationContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        name: state.registration.name,
         email: state.registration.email,
         password: state.registration.password,
         repeatPassword: state.registration.repeatPassword
@@ -28,6 +31,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+    setNameText,
     setEmailText,
     setPasswordText,
     setRepeatPasswordText

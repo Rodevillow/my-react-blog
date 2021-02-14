@@ -1,12 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import "../assets/scss/pages/signUp.scss";
 
 export default class Registration extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onNameChange = this.onNameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onRepeatPasswordChange = this.onRepeatPasswordChange.bind(this);
+  }
+
+  onNameChange(event) {
+    this.props.setNameText(event.target.value);
   }
 
   onEmailChange(event) {
@@ -23,43 +31,64 @@ export default class Registration extends React.Component {
 
   render() {
     return (
-      <div className="Registration-wrapper">
-        <h3>Registration form...</h3>
-        <form>
-          <div>
-            <input
-              className="input input__default"
-              type="text"
-              name="login"
-              placeholder="E-mail"
-              spellCheck={false}
-              onChange={this.onEmailChange}
-              value={this.props.email}
-            />
-          </div>
-          <br/>
-          <div>
-            <input
-              className="input input__default"
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={this.onPasswordChange}
-              value={this.props.password}
-            />
-          </div>
-          <br/>
-          <div>
-            <input
-              className="input input__default"
-              type="password"
-              name="repeatPassword"
-              placeholder="Repeat Password"
-              onChange={this.onRepeatPasswordChange}
-              value={this.props.repeatPassword}
-            />
-          </div>
-        </form>
+      <div className="Registration">
+        <div className="Registration-wrapper">
+          <h3>Регистрация</h3>
+          <form>
+            <div>
+              <input
+                className="input input__default"
+                type="text"
+                name="name"
+                placeholder="Введите имя"
+                spellCheck={false}
+                onChange={this.onNameChange}
+                value={this.props.name}
+              />
+            </div>
+            <br />
+            <div>
+              <input
+                className="input input__default"
+                type="text"
+                name="email"
+                placeholder="Введите почту"
+                spellCheck={false}
+                onChange={this.onEmailChange}
+                value={this.props.email}
+              />
+            </div>
+            <br />
+            <div>
+              <input
+                className="input input__default"
+                type="password"
+                name="password"
+                placeholder="Введите пароль"
+                onChange={this.onPasswordChange}
+                value={this.props.password}
+              />
+            </div>
+            <br />
+            <div>
+              <input
+                className="input input__default"
+                type="password"
+                name="repeatPassword"
+                placeholder="Введите повторно пароль"
+                onChange={this.onRepeatPasswordChange}
+                value={this.props.repeatPassword}
+              />
+            </div>
+            <br />
+            <div className="Auth__btns">
+              <Link className="btn btn__info_outline" to="/auth">
+                Авторизация
+              </Link>
+              <button className="btn btn__default">Зарегестрироваться</button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
