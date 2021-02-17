@@ -1,10 +1,17 @@
 const express = require('express')
+const cors = require('cors');
 const mongoose = require('mongoose')
 const authRouter = require('./authRouter')
 
 const PORT = process.env.PORT = 5000
 
 const app = express()
+
+// * * * * * * * * * * * * * * * * * * * *
+// Enable "Access-Control-Allow-Origin"
+app.use(cors());
+// * * * * * * * * * * * * * * * * * * * *
+app.options('*', cors());
 
 app.use(express.json())
 

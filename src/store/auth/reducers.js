@@ -1,22 +1,40 @@
-import { AUTH_CHANGE_EMAIL_TEXT, AUTH_CHANGE_PASSWORD_TEXT } from "./actions";
+import { 
+    AUTH_SET_TOKEN, 
+    AUTH_SET_IS_AUTH, 
+    AUTH_SET_USER_DATA, 
+    AUTH_SET_IS_FETCHING 
+} from "./actions";
 
 const defaultState = {
+    isFetching: false,
+    isAuth: false,
+    username: '',
     email: '',
-    password: ''
+    authToken: null
 }
 
 export const authReducer = (state = defaultState, action) => {
 
     switch (action.type) {
-        case AUTH_CHANGE_EMAIL_TEXT:
+        case AUTH_SET_IS_FETCHING:
             return {
                 ...state,
-                email: action.payload
+                isFetching: action.payload
             }
-        case AUTH_CHANGE_PASSWORD_TEXT:
+        case AUTH_SET_IS_AUTH:
             return {
                 ...state,
-                password: action.payload
+                isAuth: action.payload
+            }
+        case AUTH_SET_USER_DATA:
+            return {
+                ...state,
+                ...action.payload
+            }
+        case AUTH_SET_TOKEN:
+            return {
+                ...state,
+                authToken: action.payload
             }
         default:
             return state;

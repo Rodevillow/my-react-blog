@@ -61,14 +61,14 @@ class authController {
 
     async login(req, res) {
         try {
-            const { username, password } = req.body
+            const { email, password } = req.body
 
-            const user = await User.findOne({ username })
+            const user = await User.findOne({ email })
             if (!user) {
                 return res.status(400).json(
                     {
                         success: false,
-                        message: `Пользователь ${username} не найден!`
+                        message: `Пользователь ${email} не найден!`
                     }
                 )
             }
@@ -85,7 +85,12 @@ class authController {
 
             const token = generateAccessToken(user._id, user.roles)
             
-            return res.status(200).json({token})
+            return res.status(200).json(
+                {
+                    success: true,
+                    token
+                }
+            )
 
         } catch (e) {
             console.log(e);
