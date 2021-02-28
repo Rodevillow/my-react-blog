@@ -1,34 +1,29 @@
-import { REGISTRATION_CHANGE_NAME_TEXT, REGISTRATION_CHANGE_EMAIL_TEXT, REGISTRATION_CHANGE_PASSWORD_TEXT, REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT } from "./actions";
+import { 
+    REGISTRATION_SET_ERRORS,
+    REGISTRATION_SET_IS_FETCHING
+} from "./actions";
 
 const defaultState = {
+    isFetching: false,
     name: '',
     email: '',
     password: '',
-    repeatPassword: ''
+    repeatPassword: '',
+    errors: []
 }
 
 export const registrationReducer = (state = defaultState, action) => {
 
     switch (action.type) {
-        case REGISTRATION_CHANGE_NAME_TEXT:
-            return {
-                ...state,
-                name: action.payload
-            }
-        case REGISTRATION_CHANGE_EMAIL_TEXT:
+        case REGISTRATION_SET_ERRORS:
             return {
                 ...state,
                 email: action.payload
             }
-        case REGISTRATION_CHANGE_PASSWORD_TEXT:
+        case REGISTRATION_SET_IS_FETCHING:
             return {
                 ...state,
-                password: action.payload
-            }
-        case REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT:
-            return {
-                ...state,
-                repeatPassword: action.payload
+                name: action.payload
             }
         default:
             return state;

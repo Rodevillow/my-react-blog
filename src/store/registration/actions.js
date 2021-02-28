@@ -1,24 +1,46 @@
-export const REGISTRATION_CHANGE_NAME_TEXT = 'REGISTRATION_CHANGE_NAME_TEXT';
-export const REGISTRATION_CHANGE_EMAIL_TEXT = 'REGISTRATION_CHANGE_EMAIL_TEXT';
-export const REGISTRATION_CHANGE_PASSWORD_TEXT = 'REGISTRATION_CHANGE_PASSWORD_TEXT';
-export const REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT = 'REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT';
+import { doRegistration } from '../../api/registration'
+import { AUTH_VALIDATION_ERROR_CODE } from '../../api/_constants.status.codes'
 
-export const setNameText = (name) => ({
-    type: REGISTRATION_CHANGE_NAME_TEXT,
-    payload: name
+
+// CONSTANTS
+
+export const REGISTRATION_SET_IS_FETCHING = 'REGISTRATION_SET_IS_FETCHING'
+export const REGISTRATION_SET_ERRORS = 'REGISTRATION_SET_ERRORS'
+
+
+// SYNC ACTIONS
+
+export const setRegistrationIsFetching = (isFetching) => ({
+    type: REGISTRATION_SET_IS_FETCHING,
+    payload: isFetching
 })
 
-export const setEmailText = (email) => ({
-    type: REGISTRATION_CHANGE_EMAIL_TEXT,
-    payload: email
+export const setRegistrationErrors = (errors) => ({
+    type: REGISTRATION_SET_ERRORS,
+    payload: errors
 })
 
-export const setPasswordText = (password) => ({
-    type: REGISTRATION_CHANGE_PASSWORD_TEXT,
-    payload: password
-})
 
-export const setRepeatPasswordText = (repeatPassword) => ({
-    type: REGISTRATION_CHANGE_REPEAT_PASSWORD_TEXT,
-    payload: repeatPassword
-})
+// ASYNC ACTIONS THUNK
+
+export const asyncDoRegistration = (name, email, password, repeatPassword) => async (dispatch) => {
+
+    dispatch(setRegistrationIsFetching(true))
+
+    try {
+        const response = await doRegistration(name, email, password, repeatPassword)
+
+        console.log('SET REGISTRATION ERRORS');
+        if (response.status === AUTH_VALIDATION_ERROR_CODE) {
+            dispatch(setRegistrationErrors(response.data.errors))
+        }
+
+        dispatch(setRegistrationIsFetching(false))
+
+    } catch (e) {
+        console.log('Ой =( Что-то пошло не так. Ошбика регистрации... =(');
+        console.log(e);
+
+        dispatch(setRegistrationIsFetching(false))
+    }
+}

@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {secret} = require('./config')
 const { validationResult } = require('express-validator');
+const removeDuplicates = require('./helpers/removeDuplicates');
 
 const generateAccessToken = (id, roles) => {
     const payload = {
@@ -25,13 +26,14 @@ class authController {
                     {
                         success: false,
                         message: "Ошибка при регистрации!",
-                        errors: [...errors.errors]
+                        errors: removeDuplicates([...errors.errors])
                     }
                 )
             }
 
             const { username, email, password } = req.body
-            const candidate = await User.findOne({ username })
+
+            const candidate = await User.findOne({ email })
             if (candidate) {
                 return res.status(400).json(
                     {
@@ -43,7 +45,7 @@ class authController {
 
             const hashPassword = await bcrypt.hash(password, 7);
             const userRole = await Role.findOne({ value: "USER" })
-            const user = new User({ username, password: hashPassword, roles: [userRole.value] })
+            const user = new User({ username, email, password: hashPassword, roles: [userRole.value] })
             
             await user.save()
 
@@ -61,6 +63,17 @@ class authController {
 
     async login(req, res) {
         try {
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                return res.status(400).json(
+                    {
+                        success: false,
+                        message: "Ошибка при регистрации!",
+                        errors: removeDuplicates([...errors.errors])
+                    }
+                )
+            }
+
             const { email, password } = req.body
 
             const user = await User.findOne({ email })
@@ -84,6 +97,9 @@ class authController {
             }
 
             const token = generateAccessToken(user._id, user.roles)
+
+            user.token = token;
+            user.save()
             
             return res.status(200).json(
                 {

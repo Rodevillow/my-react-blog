@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
 const {secret} = require('../config')
+const User = require('../models/User');
 
 module.exports = function (roles) {
-    return function (req, res, next) {
+    return async function (req, res, next) {
         if (req.method === "OPTIONS") {
             next()
         }
@@ -20,8 +21,11 @@ module.exports = function (roles) {
                     }
                 )
             }
-            
-            if (!token) {
+
+            const {id: userId, roles: userRoles} = jwt.verify(token, secret)            
+            const user = await User.findById(userId);
+
+            if (!token || !user || user.token !== token) {
                 return res.status(403).json(
                     {
                         success: false,
@@ -29,8 +33,8 @@ module.exports = function (roles) {
                     }
                 )
             }
-    
-            const {roles: userRoles} = jwt.verify(token, secret)
+
+            
             let hasRole = false;
             userRoles.forEach(role => {
                 if (roles.includes(role)) {

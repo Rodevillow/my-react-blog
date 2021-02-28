@@ -5,23 +5,16 @@ import Auth from "../components/Auth";
 import { asyncDoAuth } from "../store/auth/actions";
 
 const AuthContainer = (props) => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     function onFormSubmitHandler() {
-        console.log('.......................................');
-        console.log('Отправить запрос на сервер...');
-        console.log('Данные для отправки:');
-        console.log(`Почта: ${email}`);
-        console.log(`Пароль: ${password}`);
-        console.log('Получить ответ от сервера и записать данные в store...');
-        console.log('.......................................');
-
-        props.asyncDoAuth(email, password)
+        props.asyncDoAuth(email, password);
     }
 
     return (
         <Auth
+            errors={props.errors}
             email={email}
             password={password}
             setEmailText={setEmail}
@@ -29,25 +22,13 @@ const AuthContainer = (props) => {
             onFormSubmitHandler={onFormSubmitHandler}
         />
     );
-}
-
-// class AuthContainer extends React.Component {
-//     render() {
-//         return (
-//             <Auth
-//                 email={this.props.email}
-//                 password={this.props.password}
-//                 setEmailText={this.props.setEmailText}
-//                 setPasswordText={this.props.setPasswordText}
-//             />
-//         );
-//     }
-// }
+};
 
 const mapStateToProps = (state) => {
     return {
         email: state.auth.email,
         password: state.auth.password,
+        errors: state.auth.errors,
     };
 };
 

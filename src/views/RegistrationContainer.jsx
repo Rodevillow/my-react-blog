@@ -1,40 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import Registration from "../components/Registration";
-import { setNameText, setEmailText, setPasswordText, setRepeatPasswordText } from '../store/registration/actions';
 
-class RegistrationContainer extends React.Component {
-  render() {
+import { asyncDoRegistration } from "../store/registration/actions"
+
+
+const RegistrationContainer = (props) => {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+
+    function onFormSubmitHandler() {
+        props.asyncDoRegistration(name, email, password, repeatPassword);
+    }
+
     return (
         <Registration
-            name={this.props.name}
-            email={this.props.email}
-            password={this.props.password}
-            repeatPassword={this.props.repeatPassword}
-            setNameText={this.props.setNameText}
-            setEmailText={this.props.setEmailText}
-            setPasswordText={this.props.setPasswordText}
-            setRepeatPasswordText={this.props.setRepeatPasswordText}
+            name={name}
+            email={email}
+            password={password}
+            repeatPassword={repeatPassword}
+            setNameText={setName}
+            setEmailText={setEmail}
+            setPasswordText={setPassword}
+            setRepeatPasswordText={setRepeatPassword}
+            onFormSubmitHandler={onFormSubmitHandler}
         />
-    );
-  }
+    )
 }
 
 const mapStateToProps = state => {
-    return {
-        name: state.registration.name,
-        email: state.registration.email,
-        password: state.registration.password,
-        repeatPassword: state.registration.repeatPassword
-    };
+    return {};
 }
 
 const mapDispatchToProps = {
-    setNameText,
-    setEmailText,
-    setPasswordText,
-    setRepeatPasswordText
+    asyncDoRegistration
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationContainer)

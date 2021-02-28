@@ -1,25 +1,12 @@
 import axios from 'axios'
 
-const post = (params) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
-        email,
-        password
-    })
-        .then(res => {
-            // Установить в store
-            // authToken: token
-            dispatch(setAuthToken('sometokenhash'))
-            // username & email
-            dispatch(setUserData('USERNAME', 'user@email.com'))
-            // isLoading: false
-            dispatch(setIsFetching(false))
-        })
-        .catch(err => {
-            console.log('OOPS!')
-            console.log(err)
-            console.log('WE GOT SOME ERROR')
+const API_URL = process.env.REACT_APP_API_URL;
 
-            // dispatch EXAMPLE
-            // dispatch(someAction(err.message))
-        });
+// Включаем обработку ошибок
+axios.interceptors.response.use(null, error => {
+    return error.response;
+});
+
+export const post = async (endpoint, params) => {
+    return await axios.post(`${API_URL}/${endpoint}`, params);
 }

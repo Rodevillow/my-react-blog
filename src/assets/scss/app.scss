@@ -115,12 +115,37 @@ body {
   caret-color: $textColor;
   color: $textColor;
 
+  transition: 300ms;
+
   &:focus {
     background-color: $activeColor;
+    transition: 300ms;
   }
 
   &__default {
     background-color: $hoverColor;
+    transition: 300ms;
+  }
+
+  &__error {
+    border-bottom: 1px solid red;
+    transition: 300ms;
+  }
+
+  &__success {
+    border-bottom: 1px solid green;
+    transition: 300ms;
+  }
+}
+
+.message {
+  font-size: $textSizeUS;
+  display: block;
+  padding: 8px 0 0;
+  transition: 300ms;
+  &__error {
+    color: red;
+    transition: 300ms;
   }
 }
 
@@ -181,6 +206,22 @@ body {
 
     &:active {
       background-color: $activeColor;
+      transition: 0.1s;
+    }
+  }
+
+  &__disabled {
+    background-color: $btnDisabled;
+    transition: 0.1s;
+    color: $textDisabledColor;
+    
+    &:hover {
+      background-color: $btnDisabledHover;
+      transition: 0.1s;
+    }
+
+    &:active {
+      background-color: $btnDisabledActive;
       transition: 0.1s;
     }
   }

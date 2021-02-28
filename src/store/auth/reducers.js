@@ -1,8 +1,9 @@
-import { 
-    AUTH_SET_TOKEN, 
-    AUTH_SET_IS_AUTH, 
-    AUTH_SET_USER_DATA, 
-    AUTH_SET_IS_FETCHING 
+import {
+    AUTH_SET_TOKEN,
+    AUTH_SET_IS_AUTH,
+    AUTH_SET_USER_DATA,
+    AUTH_SET_IS_FETCHING,
+    AUTH_SET_ERRORS
 } from "./actions";
 
 const defaultState = {
@@ -10,7 +11,8 @@ const defaultState = {
     isAuth: false,
     username: '',
     email: '',
-    authToken: null
+    authToken: null,
+    errors: []
 }
 
 export const authReducer = (state = defaultState, action) => {
@@ -35,6 +37,11 @@ export const authReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 authToken: action.payload
+            }
+        case AUTH_SET_ERRORS:
+            return {
+                ...state,
+                errors: action.payload
             }
         default:
             return state;
